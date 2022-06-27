@@ -51,7 +51,7 @@ input[type=text] {
   border-bottom: 2px solid black;
 }
 
-button {
+.input {
   margin: 5px;	
   background-color: #4CAF50; /* Green */
   border: none;

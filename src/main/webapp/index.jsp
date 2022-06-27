@@ -17,14 +17,16 @@
 		<li><a href="">About</a></li>
 	</ul>
 
-	<form>
+	<form action="<%=request.getContextPath()%>/BankServletCadastro"
+		method="POST">
+		<input type="hidden" value="<%=request.getParameter("url")%>"
+			name="url">
 		<div>
-			<label>Conta</label> <input type="text">
-			<br/>
-			<label>Senha</label> <input type="text">
-			<button>Logar</button>
+			<label>CPF</label> <input type="text" name="cpf"> <br /> <label>Senha</label>
+			<input type="text" name="senha">
+				<input class="input" type="submit" value="logar">
 		</div>
-			<a class="a2">Esqueceu a senha?</a>
+		<a class="a2">Esqueceu a senha?</a>
 	</form>
 
 </body>

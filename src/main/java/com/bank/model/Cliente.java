@@ -1,9 +1,9 @@
 package com.bank.model;
 
-public class Cliente {
+public class Cliente extends Bank{
 
 	private String nome;
-	private String CPF;
+	private String cpf;
 	private String email;
 	private String senha;
 	private String telefone;
@@ -22,12 +22,12 @@ public class Cliente {
 		this.nome = nome;
 	}
 
-	public String getCPF() {
-		return CPF;
+	public String getCpf() {
+		return cpf;
 	}
 
-	public void setCPF(String cPF) {
-		CPF = cPF;
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
 	}
 
 	public String getEmail() {

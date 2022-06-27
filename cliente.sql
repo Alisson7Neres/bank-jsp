@@ -18,3 +18,18 @@ create table cliente(
 Alterando coluna de int para varchar
 
 alter table cliente alter column cpf type varchar;
+
+
+create table bank (
+    ID_bank serial primary key not null,
+    nome VARCHAR(50) not null,
+    agencia INT not null,
+    numeroConta bigint,
+    saldo float,
+    tipo VARCHAR(50) not null
+   
+);
+
+alter table bank alter column ID_bank type varchar;
+
+alter table bank add FOREIGN KEY (ID_bank) references cliente (cpf);

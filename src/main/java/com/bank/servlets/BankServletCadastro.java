@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import com.bank.dao.DAOCliente;
 import com.bank.model.Cliente;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -25,6 +26,9 @@ public class BankServletCadastro extends HttpServlet {
     DAOCliente daoCliente = new DAOCliente();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		String acao = "";
+
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -47,7 +51,7 @@ public class BankServletCadastro extends HttpServlet {
 		
 		// Setando os parametros nos atributos
 		clienteCadastro.setNome(nome);
-		clienteCadastro.setCPF(cpf);
+		clienteCadastro.setCpf(cpf);
 		clienteCadastro.setEmail(email);
 		clienteCadastro.setTelefone(telefone);
 		clienteCadastro.setSenha(senha);
@@ -59,13 +63,45 @@ public class BankServletCadastro extends HttpServlet {
 		clienteCadastro.setLocalidade(localidade);
 		clienteCadastro.setUf(uf);
 		
+ 		String url = request.getParameter("url");
+		
 		try {
+			if (cpf == null) {
 			request.setAttribute("clienteCadastro", daoCliente.gravarCliente(clienteCadastro));
-			request.getRequestDispatcher("/index.jsp");
+			request.getRequestDispatcher("cadastrado.jsp").forward(request, response);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		doGet(request, response);
+		
+		try {
+			if (cpf != null && !cpf.isEmpty() && senha != null && !senha.isEmpty()) {
+				Cliente clienteLogado = new Cliente();
+				clienteLogado.setCpf(cpf);
+				clienteLogado.setSenha(senha);
+				
+				if (daoCliente.validarLogin(clienteLogado)) {
+					
+					// Pega o login da sessão
+					request.getSession().setAttribute("cliente", clienteLogado.getCpf());
+					
+					if (url == null || url.equals("null")) {
+						url = "conta.jsp";
+					}
+					
+					RequestDispatcher redirecionar = request.getRequestDispatcher(url);
+					redirecionar.forward(request, response);
+				} else {
+					RequestDispatcher redirecionar = request.getRequestDispatcher("/index.jsp");
+					request.setAttribute("msg", "Informe o cpf e senha CORRETAMENTE!");
+					redirecionar.forward(request, response);
+				}
+				
+			}
+		} catch(Exception e) {
+			
+		}
 	}
 
 }
