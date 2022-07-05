@@ -38,7 +38,10 @@ public class Bank implements Tipos {
 	}
 
 	public void setNumeroConta(long numeroConta) {
-		this.numeroConta = numeroConta = Random();
+		this.numeroConta = numeroConta;
+		if(numeroConta < 8) {
+			this.numeroConta = numeroConta = Random();
+		}
 	}
 	
 	public List<Cliente> getClientes() {
@@ -48,8 +51,8 @@ public class Bank implements Tipos {
 	public void setClientes(List<Cliente> clientes) {
 		this.clientes = clientes;
 	}
-
-	private long Random() {
+	
+	public long Random() {
 		if (numeroConta < 8) {
 			numeroConta = (long) (10000000l + Math.random() * 89999999l);
 			System.out.println(numeroConta);

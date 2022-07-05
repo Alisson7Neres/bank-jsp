@@ -13,7 +13,7 @@ public class Cliente extends Bank{
 	private String bairro;
 	private String localidade;
 	private String uf;
-
+	
 	public String getNome() {
 		return nome;
 	}
@@ -101,5 +101,5 @@ public class Cliente extends Bank{
 	public void setUf(String uf) {
 		this.uf = uf;
 	}
-
+	
 }

@@ -23,7 +23,7 @@
 			name="url">
 		<div>
 			<label>CPF</label> <input type="text" name="cpf"> <br /> <label>Senha</label>
-			<input type="text" name="senha">
+			<input type="password" name="senha">
 				<input class="input" type="submit" value="logar">
 		</div>
 		<a class="a2">Esqueceu a senha?</a>

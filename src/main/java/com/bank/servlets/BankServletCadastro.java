@@ -3,7 +3,9 @@ package com.bank.servlets;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import com.bank.dao.DAOBank;
 import com.bank.dao.DAOCliente;
+import com.bank.model.Bank;
 import com.bank.model.Cliente;
 
 import jakarta.servlet.RequestDispatcher;
@@ -27,7 +29,16 @@ public class BankServletCadastro extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String acao = "";
+		String acao = request.getParameter("acao");
+		Cliente clienteCadastro = new Cliente();
+		if (acao.equalsIgnoreCase("conta")) {
+			try {
+				
+			daoCliente.mostrarCliente(clienteCadastro, clienteCadastro.getCpf());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 
 	}
 
@@ -66,14 +77,15 @@ public class BankServletCadastro extends HttpServlet {
  		String url = request.getParameter("url");
 		
 		try {
-			if (cpf == null) {
+			
+			if (!cpf.equalsIgnoreCase(clienteCadastro.getCpf())) {
 			request.setAttribute("clienteCadastro", daoCliente.gravarCliente(clienteCadastro));
 			request.getRequestDispatcher("cadastrado.jsp").forward(request, response);
+			doGet(request, response);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		doGet(request, response);
 		
 		try {
 			if (cpf != null && !cpf.isEmpty() && senha != null && !senha.isEmpty()) {
@@ -81,10 +93,20 @@ public class BankServletCadastro extends HttpServlet {
 				clienteLogado.setCpf(cpf);
 				clienteLogado.setSenha(senha);
 				
+				Bank bank  = new Bank();
+				DAOBank daoBank = new  DAOBank();
+				
 				if (daoCliente.validarLogin(clienteLogado)) {
 					
 					// Pega o login da sessão
-					request.getSession().setAttribute("cliente", clienteLogado.getCpf());
+					daoBank.mostrarBank(bank);
+					request.getSession().setAttribute("numeroconta", bank.getNumeroConta());
+					request.getSession().setAttribute("agencia", bank.getAgencia());
+					request.getSession().setAttribute("saldo", bank.getSaldo());
+					
+					request.getSession().setAttribute("nome", clienteLogado.getNome());
+					request.getSession().setAttribute("cpf", clienteLogado.getCpf());
+
 					
 					if (url == null || url.equals("null")) {
 						url = "conta.jsp";
@@ -100,7 +122,7 @@ public class BankServletCadastro extends HttpServlet {
 				
 			}
 		} catch(Exception e) {
-			
+			e.printStackTrace();
 		}
 	}
 

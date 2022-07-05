@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.bank.connection.SingleConnection;
+import com.bank.model.Bank;
 import com.bank.model.Cliente;
 
 public class DAOCliente {
@@ -15,6 +16,8 @@ public class DAOCliente {
 	public DAOCliente() {
 		connection = SingleConnection.getConnection();
 	}
+	
+	DAOBank daoBank;
 
 	public boolean validarLogin(Cliente cliente) {
 
@@ -23,7 +26,7 @@ public class DAOCliente {
 		PreparedStatement statement = connection.prepareStatement(sql);
 			statement.setString(1, cliente.getCpf());
 			statement.setString(2, cliente.getSenha());
-
+			this.mostrarCliente(cliente, cliente.getCpf());
 			ResultSet resultSet = statement.executeQuery();
 			if (resultSet.next()) {
 				return true; // autenticado
@@ -53,8 +56,14 @@ public class DAOCliente {
 		statement.setString(10, cliente.getLocalidade());
 		statement.setString(11, cliente.getUf());
 
+		if (cliente.getNumeroConta() <= 0) {
+			long gerarConta = cliente.Random();
+			cliente.setNumeroConta(gerarConta);
+		}
+		
 		statement.execute();
 		connection.commit();
+		
 
 		return this.mostrarCliente(cliente, cliente.getCpf());
 
