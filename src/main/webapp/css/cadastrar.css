@@ -4,6 +4,23 @@ body {
 	background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(17,17,62,1) 35%, rgba(157,32,159,1) 100%); 
 }
 
+a {
+	text-decoration: none;
+	color: white;
+	font-weight: bold;
+}
+
+ul {
+	list-style-type: none;
+	/* background-color: brown; */
+}
+
+li {
+	margin: 5px;
+	display: inline;
+	padding: 5px;
+}
+
 form {
 	width: 100%;
 	top: 50%;
@@ -11,7 +28,7 @@ form {
 	transform: translate(-50%, -50%);
 	position: absolute;
 	width: 1000px;
-	height: 600px;
+	height: 650px;
 	background-color: ivory;
 	border-radius: 10px;
 }
@@ -37,7 +54,7 @@ input[type=text] {
 
 button {
   margin: 5px;	
-  background-color: #4CAF50; /* Green */
+  
   border: none;
   color: white;
   padding: 15px 32px;

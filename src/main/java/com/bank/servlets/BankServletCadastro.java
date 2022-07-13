@@ -22,19 +22,20 @@ import jakarta.servlet.http.HttpServletResponse;
 public class BankServletCadastro extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    public BankServletCadastro() {
-    }
-    
-    DAOCliente daoCliente = new DAOCliente();
+	public BankServletCadastro() {
+	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	DAOCliente daoCliente = new DAOCliente();
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		String acao = request.getParameter("acao");
 		Cliente clienteCadastro = new Cliente();
 		if (acao.equalsIgnoreCase("conta")) {
 			try {
-				
-			daoCliente.mostrarCliente(clienteCadastro, clienteCadastro.getCpf());
+
+				daoCliente.mostrarCliente(clienteCadastro, clienteCadastro.getCpf());
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -42,88 +43,61 @@ public class BankServletCadastro extends HttpServlet {
 
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		Cliente clienteCadastro = new Cliente();
-		
+		Bank bank = new Bank();
+		DAOBank daoBank = new DAOBank();
+
 		// Pegando os parametros da tela de cadastro
 		String nome = request.getParameter("nome");
 		String cpf = request.getParameter("cpf");
 		String email = request.getParameter("email");
 		String telefone = request.getParameter("telefone");
 		String senha = request.getParameter("senha");
-		
+
 		String cep = request.getParameter("cep");
 		String logradouro = request.getParameter("logradouro");
 		String complemento = request.getParameter("complemento");
 		String bairro = request.getParameter("bairro");
 		String localidade = request.getParameter("localidade");
 		String uf = request.getParameter("uf");
-		
+
+		String tipo = request.getParameter("tipo");
+
 		// Setando os parametros nos atributos
 		clienteCadastro.setNome(nome);
 		clienteCadastro.setCpf(cpf);
 		clienteCadastro.setEmail(email);
 		clienteCadastro.setTelefone(telefone);
 		clienteCadastro.setSenha(senha);
-		
+
 		clienteCadastro.setCep(cep);
 		clienteCadastro.setLogradouro(logradouro);
 		clienteCadastro.setComplemento(complemento);
 		clienteCadastro.setBairro(bairro);
 		clienteCadastro.setLocalidade(localidade);
 		clienteCadastro.setUf(uf);
-		
- 		String url = request.getParameter("url");
-		
+
+		bank.setTipo(tipo);
+
 		try {
-			
-			if (!cpf.equalsIgnoreCase(clienteCadastro.getCpf())) {
-			request.setAttribute("clienteCadastro", daoCliente.gravarCliente(clienteCadastro));
-			request.getRequestDispatcher("cadastrado.jsp").forward(request, response);
-			doGet(request, response);
+
+			if (daoCliente.existe(clienteCadastro.getCpf())) {
+				request.setAttribute("msgCpfExite", "Usuário já cadastrado!");
+				request.getRequestDispatcher("cadastrar.jsp").forward(request, response);
+			} else {
+				request.setAttribute("clienteCadastro", daoCliente.gravarCliente(clienteCadastro));
+				request.setAttribute("bank", daoBank.gravarConta(bank, clienteCadastro));
+				request.getRequestDispatcher("cadastrado.jsp").forward(request, response);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			e.getClass();
+			request.getSession().setAttribute("msgError", "ERROR! Erro ao tentar cadastrar, contate o suporte!" + e);
+			request.getRequestDispatcher("cadastrar.jsp").forward(request, response);
 		}
-		
-		try {
-			if (cpf != null && !cpf.isEmpty() && senha != null && !senha.isEmpty()) {
-				Cliente clienteLogado = new Cliente();
-				clienteLogado.setCpf(cpf);
-				clienteLogado.setSenha(senha);
-				
-				Bank bank  = new Bank();
-				DAOBank daoBank = new  DAOBank();
-				
-				if (daoCliente.validarLogin(clienteLogado)) {
-					
-					// Pega o login da sessão
-					daoBank.mostrarBank(bank);
-					request.getSession().setAttribute("numeroconta", bank.getNumeroConta());
-					request.getSession().setAttribute("agencia", bank.getAgencia());
-					request.getSession().setAttribute("saldo", bank.getSaldo());
-					
-					request.getSession().setAttribute("nome", clienteLogado.getNome());
-					request.getSession().setAttribute("cpf", clienteLogado.getCpf());
 
-					
-					if (url == null || url.equals("null")) {
-						url = "conta.jsp";
-					}
-					
-					RequestDispatcher redirecionar = request.getRequestDispatcher(url);
-					redirecionar.forward(request, response);
-				} else {
-					RequestDispatcher redirecionar = request.getRequestDispatcher("/index.jsp");
-					request.setAttribute("msg", "Informe o cpf e senha CORRETAMENTE!");
-					redirecionar.forward(request, response);
-				}
-				
-			}
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
 	}
 
 }

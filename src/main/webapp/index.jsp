@@ -17,7 +17,7 @@
 		<li><a href="">About</a></li>
 	</ul>
 
-	<form action="<%=request.getContextPath()%>/BankServletCadastro"
+	<form action="<%=request.getContextPath()%>/BankServletLogin"
 		method="POST">
 		<input type="hidden" value="<%=request.getParameter("url")%>"
 			name="url">

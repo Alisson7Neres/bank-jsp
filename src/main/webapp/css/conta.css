@@ -4,6 +4,23 @@ body {
 	background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(17,17,62,1) 35%, rgba(157,32,159,1) 100%); 
 }
 
+a {
+	text-decoration: none;
+	color: white;
+	font-weight: bold;
+}
+
+ul {
+	list-style-type: none;
+	/* background-color: brown; */
+}
+
+li {
+	margin: 5px;
+	display: inline;
+	padding: 5px;
+}
+
 form {
 	width: 1000px;
 	height: 300px;

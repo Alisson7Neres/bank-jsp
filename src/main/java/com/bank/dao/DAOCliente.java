@@ -17,7 +17,20 @@ public class DAOCliente {
 		connection = SingleConnection.getConnection();
 	}
 	
-	DAOBank daoBank;
+
+	public boolean existe(String cpf) throws SQLException {
+		
+			String sql = "select count(1) > 0 as existe from cliente where upper(cpf) =upper('"+cpf+"') ;";
+			
+			PreparedStatement statement = connection.prepareStatement(sql);
+			ResultSet set = statement.executeQuery();
+			
+			if(set.next()) {
+				return set.getBoolean("existe");
+			}
+			return false;
+	
+	}
 
 	public boolean validarLogin(Cliente cliente) {
 
@@ -56,15 +69,12 @@ public class DAOCliente {
 		statement.setString(10, cliente.getLocalidade());
 		statement.setString(11, cliente.getUf());
 
-		if (cliente.getNumeroConta() <= 0) {
-			long gerarConta = cliente.Random();
-			cliente.setNumeroConta(gerarConta);
-		}
-		
 		statement.execute();
 		connection.commit();
-		
-
+		/*
+		Bank bank = new Bank();
+		daoBank.gravarConta(bank, cliente);
+		*/
 		return this.mostrarCliente(cliente, cliente.getCpf());
 
 	}

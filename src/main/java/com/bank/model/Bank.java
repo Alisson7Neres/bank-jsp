@@ -5,31 +5,31 @@ import java.util.List;
 
 public class Bank implements Tipos {
 
-	private String nome;
-	private String agencia;
+	private String id_bank;
+	private int agencia;
 
 	private long numeroConta;
 	private Double saldo;
-	private  enum tipo{
-		CONTACORRENTE,
-		POUPANCA;
-	};
-
+	private String tipo;
+	
 	private List<Cliente> clientes = new ArrayList<Cliente>();
-
-	public String getNome() {
-		return nome;
+	
+	public String getId_bank() {
+		return id_bank;
+	}
+	
+	public void setId_bank(String id_bank) {
+		this.id_bank = id_bank;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getAgencia() {
+	public int getAgencia() {
+		if (agencia != 13) {
+			agencia = 13;
+		}
 		return agencia;
 	}
 
-	public void setAgencia(String agencia) {
+	public void setAgencia(int agencia) {
 		this.agencia = agencia;
 	}
 
@@ -40,8 +40,16 @@ public class Bank implements Tipos {
 	public void setNumeroConta(long numeroConta) {
 		this.numeroConta = numeroConta;
 		if(numeroConta < 8) {
-			this.numeroConta = numeroConta = Random();
+			this.numeroConta = Random();
 		}
+	}
+	
+	public String getTipo() {
+		return tipo;
+	}
+	
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 	
 	public List<Cliente> getClientes() {
@@ -62,10 +70,16 @@ public class Bank implements Tipos {
 	}
 
 	public Double getSaldo() {
+		if (saldo == null) {
+			this.saldo = 0.0;
+		}
 		return saldo;
 	}
 
 	public void setSaldo(Double saldo) {
+		if (saldo == null) {
+			this.saldo += 0.0;
+		}
 		this.saldo = saldo;
 	}
 

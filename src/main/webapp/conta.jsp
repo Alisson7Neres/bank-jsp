@@ -9,6 +9,14 @@
 </head>
 <body>
 
+
+	<ul>
+		<li><a href="/bank/index.jsp">Início</a></li>
+		<li><a href="cadastrar.jsp">Cadastrar</a></li>
+		<li><a href="">Contato</a></li>
+		<li><a href="">About</a></li>
+	</ul>	
+		
 <div>
 
 	<br><br><br><br><br><br><br><br><br>
@@ -28,7 +36,7 @@
 			</div>
 			<div>
 				<label>Tipo da conta:</label> 
-				<span> <%= session.getAttribute("tconta") %></span>
+				<span> <%= session.getAttribute("tipo") %></span>
 			</div>
 		</div>
 	</form>
