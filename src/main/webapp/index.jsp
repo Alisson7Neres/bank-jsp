@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+	
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,8 +25,9 @@
 			name="url">
 		<div>
 			<label>CPF</label> <input type="text" name="cpf"> <br /> <label>Senha</label>
-			<input type="password" name="senha">
-				<input class="input" type="submit" value="logar">
+			<input type="password" name="senha" required>
+				<input class="input" type="submit" value="logar" required>
+				<label style="color: red"><c:out value="${ msg }"></c:out></label>
 		</div>
 		<a class="a2">Esqueceu a senha?</a>
 	</form>
