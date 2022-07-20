@@ -58,6 +58,7 @@ public class BankServletLogin extends HttpServlet {
 
 				request.getSession().setAttribute("nome", clienteLogado.getNome());
 				request.getSession().setAttribute("cpf", clienteLogado.getCpf());
+				request.getSession().setAttribute("rg", clienteLogado.getRg());
 
 				if (url == null || url.equals("null")) {
 					url = "conta.jsp";

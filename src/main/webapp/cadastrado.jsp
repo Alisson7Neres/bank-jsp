@@ -12,7 +12,7 @@
 <body>
 
 	<ul>
-		<li><a href="">Início</a></li>
+		<li><a href="/bank/index.jsp">Início</a></li>
 		<li><a href="cadastrar.jsp">Cadastrar</a></li>
 		<li><a href="">Contato</a></li>
 		<li><a href="">About</a></li>
@@ -28,6 +28,10 @@
 			<div>
 				<label>CPF</label> <input id="cpf" name="cpf"
 					value="${ clienteCadastro.cpf }" disabled="disabled">
+			</div>
+			<div>
+				<label>RG</label> <input id="rg" name="rg"
+					value="${ clienteCadastro.rg }" disabled="disabled">
 			</div>
 			<div>
 				<label>Email</label> <input id="email" name="email"

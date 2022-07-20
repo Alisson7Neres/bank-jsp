@@ -37,6 +37,10 @@
 					value="${ clienteCadastro.cpf }" required>
 			</div>
 			<div>
+				<label>RG</label>
+				<input id="rg" name="rg" value="${ clienteCadastro.rg}" required>
+			</div>
+			<div>
 				<label>Email</label> <input id="email" name="email"
 					value="${ clienteCadastro.email }" required>
 			</div>
@@ -97,6 +101,8 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"
 		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
 		crossorigin="anonymous"></script>
+	
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
 	<script>
 		function viaCep() {
 			var cep = $('#cep').val();
@@ -157,6 +163,11 @@
 
 		if (elem.hasAttribute('required')) {
 		}
+		
+		$('#cpf').mask('999.999.999-99');
+		$('#rg').mask('9.999-999');
+		$('#telefone').mask('(99) 9 9999-9999');
+		$('#cep').mask('99999-999');
 	</script>
 </body>
 </html>

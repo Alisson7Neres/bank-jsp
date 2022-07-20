@@ -52,6 +52,7 @@ public class BankServletCadastro extends HttpServlet {
 		// Pegando os parametros da tela de cadastro
 		String nome = request.getParameter("nome");
 		String cpf = request.getParameter("cpf");
+		String rg = request.getParameter("rg");
 		String email = request.getParameter("email");
 		String telefone = request.getParameter("telefone");
 		String senha = request.getParameter("senha");
@@ -68,6 +69,7 @@ public class BankServletCadastro extends HttpServlet {
 		// Setando os parametros nos atributos
 		clienteCadastro.setNome(nome);
 		clienteCadastro.setCpf(cpf);
+		clienteCadastro.setRg(rg);
 		clienteCadastro.setEmail(email);
 		clienteCadastro.setTelefone(telefone);
 		clienteCadastro.setSenha(senha);

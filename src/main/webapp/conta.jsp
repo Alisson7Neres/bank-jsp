@@ -52,6 +52,10 @@
 			<label>CPF</label>
 			<span><%= session.getAttribute("cpf") %></span>
 		</div>
+		<div>
+			<label>RG</label>
+			<span><%= session.getAttribute("rg") %></span>
+		</div>
 	</form>
 	
 </div>

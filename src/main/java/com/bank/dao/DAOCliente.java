@@ -54,20 +54,21 @@ public class DAOCliente {
 
 	public Cliente gravarCliente(Cliente cliente) throws SQLException {
 
-		String sql = "insert into cliente(cpf, nome, email, telefone, senha, cep, logradouro, complemento, bairro, localidade, uf) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		String sql = "insert into cliente(cpf, rg, nome, email, telefone, senha, cep, logradouro, complemento, bairro, localidade, uf) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		PreparedStatement statement = connection.prepareStatement(sql);
 
 		statement.setString(1, cliente.getCpf());
-		statement.setString(2, cliente.getNome());
-		statement.setString(3, cliente.getEmail());
-		statement.setString(4, cliente.getTelefone());
-		statement.setString(5, cliente.getSenha());
-		statement.setString(6, cliente.getCep());
-		statement.setString(7, cliente.getLogradouro());
-		statement.setString(8, cliente.getComplemento());
-		statement.setString(9, cliente.getBairro());
-		statement.setString(10, cliente.getLocalidade());
-		statement.setString(11, cliente.getUf());
+		statement.setString(2, cliente.getRg());
+		statement.setString(3, cliente.getNome());
+		statement.setString(4, cliente.getEmail());
+		statement.setString(5, cliente.getTelefone());
+		statement.setString(6, cliente.getSenha());
+		statement.setString(7, cliente.getCep());
+		statement.setString(8, cliente.getLogradouro());
+		statement.setString(9, cliente.getComplemento());
+		statement.setString(10, cliente.getBairro());
+		statement.setString(11, cliente.getLocalidade());
+		statement.setString(12, cliente.getUf());
 
 		statement.execute();
 		connection.commit();
@@ -88,6 +89,7 @@ public class DAOCliente {
 		if (result.next()) {
 
 			cliente.setCpf(result.getString("cpf"));
+			cliente.setRg(result.getString("rg"));
 			cliente.setNome(result.getString("nome"));
 			cliente.setEmail(result.getString("email"));
 			cliente.setTelefone(result.getString("telefone"));
@@ -108,6 +110,7 @@ public class DAOCliente {
 	public Cliente esqueciMe(Cliente cliente) {
 
 		String cpf = cliente.getCpf();
+		String rg = cliente.getRg();
 		String email = cliente.getEmail();
 
 		try {
@@ -142,16 +145,19 @@ public class DAOCliente {
 			}
 
 			// FIM
+			
+			String senha = thebuffer.toString();
 
-			String sql = "update cliente senha set senha = ? where upper(cpf) = ? and email = ?";
+			String sql = "update cliente senha set senha = ? where upper(cpf) = ? and upper(rg) = ? and email = ?";
 
 			PreparedStatement statement = connection.prepareStatement(sql);
-			statement.setString(1, thebuffer.toString());
+			statement.setString(1, senha);
 			statement.setString(2, cpf);
-			statement.setString(3, email);
+			statement.setString(3, rg);
+			statement.setString(4, email);
 			statement.execute();
 
-			connection.commit();
+			connection.commit();;
 
 		} catch (SQLException e) {
 			e.printStackTrace();

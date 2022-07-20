@@ -4,6 +4,7 @@ public class Cliente extends Bank{
 
 	private String nome;
 	private String cpf;
+	private String rg;
 	private String email;
 	private String senha;
 	private String telefone;
@@ -28,6 +29,14 @@ public class Cliente extends Bank{
 
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
+	}
+	
+	public void setRg(String rg) {
+		this.rg = rg;
+	}
+	
+	public String getRg() {
+		return rg;
 	}
 
 	public String getEmail() {

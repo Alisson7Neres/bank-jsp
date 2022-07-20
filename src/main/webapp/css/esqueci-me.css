@@ -1,0 +1,91 @@
+@charset "UTF-8";
+
+body {
+	background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%,
+		rgba(17, 17, 62, 1) 35%, rgba(157, 32, 159, 1) 100%);
+}
+
+a {
+	text-decoration: none;
+	color: white;
+	font-weight: bold;
+}
+
+ul {
+	list-style-type: none;
+	/* background-color: brown; */
+}
+
+li {
+	margin: 5px;
+	display: inline;
+	padding: 5px;
+}
+
+form {
+	width: 100%;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	position: absolute;
+	width: 400px;
+	background-color: ivory;
+	border-radius: 10px;
+}
+
+div {
+	display: table-caption;
+	display: grid;
+	justify-content: center;
+	align-items: center;
+	margin: 200px;
+}
+
+label {
+	text-align: center;
+	font-weight: bold;
+	padding: 10px;
+}
+
+input[type=text] {
+	border: none;
+	border-bottom: 2px solid black;
+}
+
+input[type=password] {
+	border: none;
+	border-bottom: 2px solid black;
+}
+
+.input {
+	margin: 5px;
+	background-color: #4CAF50; /* Green */
+	border: none;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	cursor: pointer;
+}
+
+.input2 {
+	border: none;
+	color: red;
+	font-weight: bold;
+}
+
+h3 {
+	color: white;
+	font-weight: bold;
+	justify-content: center;
+	display: flex;
+	top: 100px;
+	position: relative;
+}
+
+*, html {
+	margin: 0;
+	padding: 0;
+}

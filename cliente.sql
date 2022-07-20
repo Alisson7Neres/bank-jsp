@@ -18,6 +18,8 @@ create table cliente(
 Alterando coluna de int para varchar
 
 alter table cliente alter column cpf type varchar;
+alter table cliente add column rg character varying ;
+alter table cliente alter column rg set not null;
 
 
 create table bank (
