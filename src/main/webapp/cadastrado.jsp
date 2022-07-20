@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
 <html>
@@ -10,6 +10,13 @@
 <title>Cadastro</title>
 </head>
 <body>
+
+	<ul>
+		<li><a href="">Início</a></li>
+		<li><a href="cadastrar.jsp">Cadastrar</a></li>
+		<li><a href="">Contato</a></li>
+		<li><a href="">About</a></li>
+	</ul>
 
 	<form action="<%=request.getContextPath()%>/BankServletCadastro"
 		method="get">

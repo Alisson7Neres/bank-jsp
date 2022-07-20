@@ -8,7 +8,6 @@ import com.bank.dao.DAOCliente;
 import com.bank.model.Bank;
 import com.bank.model.Cliente;
 
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

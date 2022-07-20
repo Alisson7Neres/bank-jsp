@@ -29,7 +29,7 @@
 				<input class="input" type="submit" value="logar" required>
 				<label style="color: red"><c:out value="${ msg }"></c:out></label>
 		</div>
-		<a class="a2">Esqueceu a senha?</a>
+		<a class="a2" href="esqueci-me.jsp">Esqueceu a senha?</a>
 	</form>
 
 </body>
