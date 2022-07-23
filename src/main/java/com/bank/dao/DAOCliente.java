@@ -79,6 +79,61 @@ public class DAOCliente {
 
 	}
 
+	public Cliente atualizarCliente(Cliente cliente, String cpf) throws SQLException {
+		
+		try {
+
+			String sql = "update cliente email set email = ?, telefone = ?, senha = ?, "
+					+ "cep = ?, logradouro = ?, complemento = ?, bairro = ?, localidade = ?, uf = ? where cpf = ('"
+					+ cpf + "')";
+			PreparedStatement statement = connection.prepareStatement(sql);
+
+			statement.setString(1, cliente.getEmail());
+			if (cliente.getEmail() == null) {
+				cliente.setEmail(cliente.getEmail());
+			}
+			statement.setString(2, cliente.getTelefone());
+			if (cliente.getTelefone() == null) {
+				cliente.setTelefone(cliente.getTelefone());
+			}
+			statement.setString(3, cliente.getSenha());
+			if (cliente.getSenha() == null) {
+				cliente.setSenha(cliente.getSenha());
+			}
+			statement.setString(4, cliente.getCep());
+			if (cliente.getCep() == null) {
+				cliente.setCep(cliente.getCep());
+			}
+			statement.setString(5, cliente.getLogradouro());
+			if (cliente.getLogradouro() == null) {
+				cliente.setLogradouro(cliente.getLogradouro());
+			}
+			statement.setString(6, cliente.getComplemento());
+			if (cliente.getComplemento() == null) {
+				cliente.setComplemento(cliente.getComplemento());
+			}
+			statement.setString(7, cliente.getBairro());
+			if (cliente.getBairro() == null) {
+				cliente.setBairro(cliente.getBairro());
+			}
+			statement.setString(8, cliente.getLocalidade());
+			if (cliente.getLocalidade() == null) {
+				cliente.setLocalidade(cliente.getLocalidade());
+			}
+			statement.setString(9, cliente.getUf());
+			if (cliente.getUf() == null) {
+				cliente.setUf(cliente.getUf());
+			}
+
+			statement.execute();
+			connection.commit();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return  this.mostrarCliente(cliente, cliente.getCpf());
+	}
+
 	public Cliente mostrarCliente(Cliente cliente, String CPF) throws SQLException {
 
 		String sql = "select * from cliente where cpf = ?";
@@ -145,7 +200,7 @@ public class DAOCliente {
 			}
 
 			// FIM
-			
+
 			String senha = thebuffer.toString();
 
 			String sql = "update cliente senha set senha = ? where upper(cpf) = ? and upper(rg) = ? and email = ?";
@@ -157,7 +212,8 @@ public class DAOCliente {
 			statement.setString(4, email);
 			statement.execute();
 
-			connection.commit();;
+			connection.commit();
+			;
 
 		} catch (SQLException e) {
 			e.printStackTrace();

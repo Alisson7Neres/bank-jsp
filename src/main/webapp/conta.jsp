@@ -14,6 +14,7 @@
 		<li><a href="/bank/index.jsp">Início</a></li>
 		<li><a href="cadastrar.jsp">Cadastrar</a></li>
 		<li><a href="">Contato</a></li>
+		<li><a href="login.jsp">Editar</a>
 		<li><a href="">About</a></li>
 	</ul>	
 		

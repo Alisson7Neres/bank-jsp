@@ -76,7 +76,8 @@
 		</div>
 		<br>
 		<div>
-			<label>Tipo da conta:</label> <span> <%=session.getAttribute("tipo")%></span>
+			<label>Tipo da conta:</label> 
+					<input value="${bank.tipo}" disabled="disabled">
 		</div>
 	</form>
 
