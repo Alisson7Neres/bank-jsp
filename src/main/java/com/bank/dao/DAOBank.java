@@ -23,7 +23,9 @@ public class DAOBank {
 			String sql = "insert into bank (id_bank, agencia, numeroconta, saldo, tipo) values (?, ? ,? , ? , ?);";
 			PreparedStatement statement = connection.prepareStatement(sql);
 
-			statement.setString(1, cliente.getCpf());
+			String bank_id = bank.getId_bank();
+			bank_id = cliente.getCpf();
+			statement.setString(1, bank_id);
 			statement.setInt(2, bank.getAgencia());
 			if (bank.getNumeroConta() <= 0) {
 				long gerarConta = bank.Random();
@@ -38,22 +40,94 @@ public class DAOBank {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return this.mostrarBank(bank);
+		return this.mostrarBank(bank, cliente);
 	}
-
-	public Bank mostrarBank(Bank bank) {
+	
+	public Bank TransferenciaDestino(Bank bank, Cliente cliente) {
 
 		try {
-			String sql = "select*from cliente inner join bank on cpf = id_bank;";
+			
+			String sql = "update bank saldo set saldo = ? where numeroconta = ?";
+	
 			PreparedStatement statement = connection.prepareStatement(sql);
-			ResultSet set = statement.executeQuery();
+			
+			statement.setDouble(1, bank.getSaldo());
+			statement.setLong(2, bank.getNumeroConta());
+			
 
+			statement.execute();
+			connection.commit();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return this.mostrarBank(bank, cliente);
+	}
+	
+	public Bank TransferenciaTitular(Bank bank, Cliente cliente) {
+
+		try {
+			
+			String sql = "update bank saldo set saldo = ? where numeroconta = ?";
+	
+			PreparedStatement statement = connection.prepareStatement(sql);
+			
+			statement.setDouble(1, bank.getSaldo());
+			statement.setLong(2, bank.getNumeroConta());
+
+			statement.execute();
+			connection.commit();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return this.mostrarBank(bank, cliente);
+	}
+
+	public Bank mostrarBank(Bank bank, Cliente cliente) {
+
+		try {
+
+			String sql = "select DISTINCT *from cliente  inner join bank on id_bank = ? where cpf = ?;";
+			
+			PreparedStatement statement = connection.prepareStatement(sql);
+			
+			String bank_id = bank.getId_bank();
+			bank_id = cliente.getCpf();
+			
+			statement.setString(1, cliente.getCpf());
+			statement.setString(2, bank_id);
+
+			ResultSet set = statement.executeQuery();
 			if (set.next()) {
 				bank.setNumeroConta(set.getLong("numeroconta"));
 				bank.setSaldo(set.getDouble("saldo"));
 				bank.setAgencia(set.getInt("agencia"));
 				bank.setTipo(set.getString("tipo"));
 
+			}
+
+			statement.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return bank;
+
+	}
+	
+	public Bank mostrarDestino(Bank bank, String numeroConta) {
+
+		try {
+			String sql = "select distinct * from bank where numeroconta = ?;";
+			
+			PreparedStatement statement = connection.prepareStatement(sql);
+			
+			statement.setLong(1, bank.getNumeroConta());
+
+			ResultSet set = statement.executeQuery();
+			if (set.next()) {
+				bank.setNumeroConta(set.getLong("numeroconta"));
+				bank.setSaldo(set.getDouble("saldo"));
+				bank.setAgencia(set.getInt("agencia"));
+				bank.setTipo(set.getString("tipo"));
 			}
 
 			statement.execute();

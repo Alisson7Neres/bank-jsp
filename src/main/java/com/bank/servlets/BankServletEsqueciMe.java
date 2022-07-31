@@ -66,7 +66,7 @@ public class BankServletEsqueciMe extends HttpServlet {
 		
 		try {
 				request.setAttribute("cliente", daoCliente.mostrarCliente(cliente, cliente.getCpf()));
-				request.setAttribute("bank", daoBank.mostrarBank(bank));
+				request.setAttribute("bank", daoBank.mostrarBank(bank, cliente));
 				request.getRequestDispatcher("editar.jsp").forward(request, response);
 		} catch (SQLException e) {
 			e.getClass();

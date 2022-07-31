@@ -1,6 +1,7 @@
 package com.bank.servlets;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import com.bank.dao.DAOBank;
 import com.bank.dao.DAOCliente;
@@ -50,7 +51,7 @@ public class BankServletLogin extends HttpServlet {
 			if (daoCliente.validarLogin(clienteLogado)) {
 
 				// Pega o login da sessão
-				daoBank.mostrarBank(bank);
+				daoBank.mostrarBank(bank, clienteLogado);
 				request.getSession().setAttribute("numeroconta", bank.getNumeroConta());
 				request.getSession().setAttribute("agencia", bank.getAgencia());
 				request.getSession().setAttribute("saldo", bank.getSaldo());
@@ -62,6 +63,12 @@ public class BankServletLogin extends HttpServlet {
 
 				if (url == null || url.equals("null")) {
 					url = "conta.jsp";
+					
+					try {
+						request.setAttribute("cliente", daoCliente.mostrarCliente(clienteLogado, cpf));
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
 				}
 
 				RequestDispatcher redirecionar = request.getRequestDispatcher(url);

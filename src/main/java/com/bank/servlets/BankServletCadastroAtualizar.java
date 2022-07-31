@@ -69,7 +69,7 @@ public class BankServletCadastroAtualizar extends HttpServlet {
 		
 		try {
 			request.setAttribute("clienteCadastro", daoCliente.atualizarCliente(clienteCadastro, clienteCadastro.getCpf()));
-			request.setAttribute("bank", daoBank.mostrarBank(bank));
+			request.setAttribute("bank", daoBank.mostrarBank(bank, clienteCadastro));
 			request.getRequestDispatcher("cadastrado.jsp").forward(request, response);
 		} catch (SQLException e) {
 			e.printStackTrace();

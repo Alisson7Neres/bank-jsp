@@ -30,15 +30,15 @@
 		<div>
 			<div>
 				<label>Nome</label> <input id="nome" name="nome"
-					value="${ clienteCadastro.nome }" required>
+					value="${ clienteCadastro.nome }" min="10" maxlength="50" required>
 			</div>
 			<div>
 				<label>CPF</label> <input id="cpf" name="cpf"
-					value="${ clienteCadastro.cpf }" required>
+					value="${ clienteCadastro.cpf }" min="12" required>
 			</div>
 			<div>
 				<label>RG</label>
-				<input id="rg" name="rg" value="${ clienteCadastro.rg}" required>
+				<input id="rg" name="rg" value="${ clienteCadastro.rg}" min="9" required>
 			</div>
 			<div>
 				<label>Email</label> <input id="email" name="email"
@@ -46,11 +46,11 @@
 			</div>
 			<div>
 				<label>Telefone</label> <input id="telefone" name="telefone"
-					value="${ clienteCadastro.telefone }" required>
+					value="${ clienteCadastro.telefone }" min="10" required>
 			</div>
 			<div>
 				<label>Senha</label> <input id="senha" name="senha" type="password"
-					value="${ clienteCadastro.senha }" required>
+					value="${ clienteCadastro.senha }" min="6" required>
 			</div>
 		</div>
 		<div>

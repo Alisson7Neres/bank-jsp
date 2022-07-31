@@ -136,7 +136,7 @@ public class DAOCliente {
 
 	public Cliente mostrarCliente(Cliente cliente, String CPF) throws SQLException {
 
-		String sql = "select * from cliente where cpf = ?";
+		String sql = "select distinct * from cliente where cpf = ?";
 		PreparedStatement statement = connection.prepareStatement(sql);
 		statement.setString(1, CPF);
 		ResultSet result = statement.executeQuery();
@@ -158,6 +158,35 @@ public class DAOCliente {
 
 		}
 
+		statement.execute();
+		return cliente;
+	}
+	
+	public Cliente mostrarCliente2(Cliente cliente) throws SQLException {
+
+		String sql = "select * from cliente where cpf = cpf";
+		
+		String cpf = cliente.getCpf();
+		
+		PreparedStatement statement = connection.prepareStatement(sql);
+		ResultSet result = statement.executeQuery();
+
+		if (result.next()) {
+
+			cliente.setCpf(cliente.getCpf());
+			cliente.setRg(result.getString("rg"));
+			cliente.setNome(result.getString("nome"));
+			cliente.setEmail(result.getString("email"));
+			cliente.setTelefone(result.getString("telefone"));
+			cliente.setSenha(result.getString("senha"));
+			cliente.setCep(result.getString("cep"));
+			cliente.setLogradouro(result.getString("logradouro"));
+			cliente.setComplemento(result.getString("complemento"));
+			cliente.setBairro(result.getString("bairro"));
+			cliente.setLocalidade(result.getString("localidade"));
+			cliente.setUf(result.getString("uf"));
+
+		}
 		statement.execute();
 		return cliente;
 	}
