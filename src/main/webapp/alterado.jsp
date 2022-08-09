@@ -13,8 +13,8 @@
 	<ul>
 		<li><a href="/">Início</a></li>
 		<li><a href="/cadastrar.jsp">Cadastrar</a></li>
-		<li><a href="">Contato</a></li>
-		<li><a href="">About</a></li>
+		<li><a href="mailto:alisson.neres@hotmail.com">Contato</a></li>
+		<li><a href="https://github.com/Alisson7Neres/bank-jsp" target="blank">About</a></li>
 	</ul>
 
 	<h3>Sua nova senha:</h3>

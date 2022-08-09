@@ -14,8 +14,9 @@
 	<ul>
 		<li><a href="/bank/index.jsp">Início</a></li>
 		<li><a href="cadastrar.jsp">Cadastrar</a></li>
-		<li><a href="">Contato</a></li>
-		<li><a href="">About</a></li>
+		<li><a href="mailto:alisson.neres@hotmail.com">Contato</a></li>
+		<li><a href="https://github.com/Alisson7Neres/bank-jsp"
+			target="blank">About</a></li>
 	</ul>
 
 	<form action="<%=request.getContextPath()%>/BankServletCadastro"
@@ -76,8 +77,8 @@
 		</div>
 		<br>
 		<div>
-			<label>Tipo da conta:</label> 
-					<input value="${bank.tipo}" disabled="disabled">
+			<label>Tipo da conta:</label> <input value="${bank.tipo}"
+				disabled="disabled">
 		</div>
 	</form>
 

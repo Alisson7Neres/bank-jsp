@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.Random;
 
 import com.bank.connection.SingleConnection;
+import com.bank.model.Bank;
 import com.bank.model.Cliente;
 
 public class DAOCliente {
@@ -80,7 +81,7 @@ public class DAOCliente {
 	}
 
 	public Cliente atualizarCliente(Cliente cliente, String cpf) throws SQLException {
-		
+
 		try {
 
 			String sql = "update cliente email set email = ?, telefone = ?, senha = ?, "
@@ -127,11 +128,11 @@ public class DAOCliente {
 
 			statement.execute();
 			connection.commit();
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return  this.mostrarCliente(cliente, cliente.getCpf());
+		return this.mostrarCliente(cliente, cliente.getCpf());
 	}
 
 	public Cliente mostrarCliente(Cliente cliente, String CPF) throws SQLException {
@@ -161,13 +162,13 @@ public class DAOCliente {
 		statement.execute();
 		return cliente;
 	}
-	
+
 	public Cliente mostrarCliente2(Cliente cliente) throws SQLException {
 
 		String sql = "select * from cliente where cpf = cpf";
-		
+
 		String cpf = cliente.getCpf();
-		
+
 		PreparedStatement statement = connection.prepareStatement(sql);
 		ResultSet result = statement.executeQuery();
 
@@ -249,6 +250,44 @@ public class DAOCliente {
 		}
 
 		return cliente;
+	}
+	
+	public void ClienteTitular(Cliente cliente, Bank bankTitular) {
+		
+		try {
+
+			String sql = "select * from cliente inner join bank b on id_bank = cpf where numeroconta = ('"+bankTitular.getNumeroConta()+"') ";
+			PreparedStatement statement = connection.prepareStatement(sql);
+			ResultSet set = statement.executeQuery();
+			
+			if (set.next()) {
+				cliente.setNome(set.getString("nome"));
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	public void ClienteDestino(Cliente clienteDestino, Bank bankDestino) {
+		
+		try {
+
+			String sql = "select * from cliente inner join bank b on id_bank = cpf where numeroconta = ('"+bankDestino.getNumeroConta()+"') ";
+			PreparedStatement statement = connection.prepareStatement(sql);
+			ResultSet set = statement.executeQuery();
+			
+			if (set.next()) {
+				clienteDestino.setNome(set.getString("nome"));
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 
 }

@@ -15,16 +15,16 @@
 	<ul>
 		<li><a href="/bank/index.jsp">Início</a></li>
 		<li><a href="cadastrar.jsp">Cadastrar</a></li>
-		<li><a href="">Contato</a></li>
-		<li><a href="">About</a></li>
+		<li><a href="mailto:alisson.neres@hotmail.com">Contato</a></li>
+		<li><a href="https://github.com/Alisson7Neres/bank-jsp"
+			target="blank">About</a></li>
 	</ul>
 
 	<form action="<%=request.getContextPath()%>/BankServletCadastro"
 		method="post" id="formulario">
 		<label
 			style="color: red; font-size: larger; position: absolute; text-align: center; width: 100%;"><c:out
-				value="${ msgError }"></c:out></label>
-				<label
+				value="${ msgError }"></c:out></label> <label
 			style="color: red; font-size: larger; position: absolute; text-align: center; width: 100%;"><c:out
 				value="${ msgCpfExite }"></c:out></label>
 		<div>
@@ -37,8 +37,8 @@
 					value="${ clienteCadastro.cpf }" min="12" required>
 			</div>
 			<div>
-				<label>RG</label>
-				<input id="rg" name="rg" value="${ clienteCadastro.rg}" min="9" required>
+				<label>RG</label> <input id="rg" name="rg"
+					value="${ clienteCadastro.rg}" min="9" required>
 			</div>
 			<div>
 				<label>Email</label> <input id="email" name="email"
@@ -101,8 +101,9 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"
 		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
 		crossorigin="anonymous"></script>
-	
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
+
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
 	<script>
 		function viaCep() {
 			var cep = $('#cep').val();
@@ -163,7 +164,7 @@
 
 		if (elem.hasAttribute('required')) {
 		}
-		
+
 		$('#cpf').mask('999.999.999-99');
 		$('#rg').mask('9.999-999');
 		$('#telefone').mask('(99) 9 9999-9999');

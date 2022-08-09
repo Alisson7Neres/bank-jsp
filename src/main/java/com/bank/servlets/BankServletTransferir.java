@@ -44,12 +44,13 @@ public class BankServletTransferir extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		Cliente cliente = new Cliente();
+		Cliente clienteDestino = new Cliente();
+		
 		Bank bankTitular = new Bank();
 		Bank bankDestino = new Bank();
 		
 		DAOCliente daoCliente = new DAOCliente();
 		DAOBank daoBank = new DAOBank();
-		
 		
 		try {
 			
@@ -100,11 +101,18 @@ public class BankServletTransferir extends HttpServlet {
 			
 			daoBank.TransferenciaDestino(bankDestino, cliente);
 			daoBank.TransferenciaTitular(bankTitular, cliente);
+			daoCliente.ClienteDestino(clienteDestino,bankDestino);
+			daoCliente.ClienteTitular(cliente, bankTitular);
+			
+			request.getSession().setAttribute("numeroContaDestino", bankDestino.getNumeroConta());
+			request.getSession().setAttribute("saldoDestino", saldoDestinatario);
+			request.getSession().setAttribute("nomeDestino", clienteDestino.getNome());
+			request.getSession().setAttribute("nomeTitular", cliente.getNome());
 		}
 		
 		request.setAttribute("cliente", daoCliente.mostrarCliente(cliente, cliente.getCpf()));
 		request.setAttribute("bank", daoBank.mostrarBank(bankTitular, cliente));
-		request.getRequestDispatcher("conta.jsp").forward(request, response);
+		request.getRequestDispatcher("transferido.jsp").forward(request, response);
 		
 		} catch (Exception e) {
 			e.printStackTrace();
