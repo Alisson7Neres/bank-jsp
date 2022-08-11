@@ -1,6 +1,7 @@
 package com.bank.model;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Bank implements Tipos {
@@ -11,6 +12,7 @@ public class Bank implements Tipos {
 	private long numeroConta;
 	private Double saldo;
 	private String tipo;
+	private Date data;
 	
 	private List<Cliente> clientes = new ArrayList<Cliente>();
 	
@@ -81,6 +83,14 @@ public class Bank implements Tipos {
 			this.saldo += 0.0;
 		}
 		this.saldo = saldo;
+	}
+	
+	public Date getData() {
+		return data;
+	}
+	
+	public void setData(Date data) {
+		this.data = data;
 	}
 
 	@Override
