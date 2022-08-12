@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,6 +31,8 @@
 	<form action="<%=request.getContextPath()%>/BankServletTransferir"
 		method="POST">
 		<div>
+		<label style="color: red"><c:out value="${ msg }"></c:out></label>
+		<br/>
 			<input id="nomeTitular" name="nomeTitular" value="${ cliente.nome }"
 				hidden=""> <input id="cpfTitular" name="cpfTitular"
 				value="${ cliente.cpf }" hidden=""> <input

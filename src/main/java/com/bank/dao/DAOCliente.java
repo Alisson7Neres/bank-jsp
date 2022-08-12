@@ -243,7 +243,6 @@ public class DAOCliente {
 			statement.execute();
 
 			connection.commit();
-			;
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -265,7 +264,6 @@ public class DAOCliente {
 			}
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -284,7 +282,6 @@ public class DAOCliente {
 			}
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

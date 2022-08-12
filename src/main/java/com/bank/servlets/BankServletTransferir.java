@@ -10,6 +10,7 @@ import com.bank.dao.DAOCliente;
 import com.bank.model.Bank;
 import com.bank.model.Cliente;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -100,10 +101,28 @@ public class BankServletTransferir extends HttpServlet {
 				destinoBank = destinoDesconto;
 				bankDestino.setSaldo(destinoBank);
 
-				daoBank.TransferenciaDestino(bankDestino, cliente);
-				daoBank.TransferenciaTitular(bankTitular, cliente);
-				daoCliente.ClienteDestino(clienteDestino, bankDestino);
-				daoCliente.ClienteTitular(cliente, bankTitular);
+				if (saldoDestino2 > 0) {
+
+					// Verificando se as consta são diferentes
+					if (bankDestino.getNumeroConta() != bankTitular.getNumeroConta()) {
+
+						daoBank.TransferenciaDestino(bankDestino, cliente);
+						daoBank.TransferenciaTitular(bankTitular, cliente);
+						daoCliente.ClienteDestino(clienteDestino, bankDestino);
+						daoCliente.ClienteTitular(cliente, bankTitular);
+
+					} else {
+						RequestDispatcher redirecionar = request.getRequestDispatcher("/transferir.jsp");
+						request.setAttribute("msg", "Você não pode fazer esse tipo de transferencia!");
+						redirecionar.forward(request, response);
+						return;
+					}
+				} else {
+					RequestDispatcher redirecionar = request.getRequestDispatcher("/transferir.jsp");
+					request.setAttribute("msg", "Digite a quantia a ser transferida!");
+					redirecionar.forward(request, response);
+					return;
+				}
 
 				request.getSession().setAttribute("numeroContaDestino", bankDestino.getNumeroConta());
 				request.getSession().setAttribute("saldoDestino", saldoDestinatario);
@@ -121,7 +140,7 @@ public class BankServletTransferir extends HttpServlet {
 
 				String dataView = request.getParameter("formattedDate");
 				String horaView = request.getParameter("formattedDate");
-				
+
 				request.getSession().setAttribute("formattedDate", formattedDate);
 				request.getSession().setAttribute("formattedTime", formattedTime);
 			}
