@@ -77,7 +77,7 @@ public class BankServletTransferir extends HttpServlet {
 			bankDestino.setNumeroConta(java.lang.Long.parseLong(numeroContaDestino));
 
 			// Certificando se tem dinheiro na conta
-			if (!saldoTitular.isEmpty()) {
+			if (!saldoTitular.isEmpty() && !saldoTitular.equalsIgnoreCase("0.0")) {
 
 				// Atribuindo valores do saldo para fazer a soma e subtração dos valores
 				double saldoTitulo = java.lang.Double.parseDouble(saldoTitular);
@@ -143,6 +143,11 @@ public class BankServletTransferir extends HttpServlet {
 
 				request.getSession().setAttribute("formattedDate", formattedDate);
 				request.getSession().setAttribute("formattedTime", formattedTime);
+			} else {
+				RequestDispatcher redirecionar = request.getRequestDispatcher("/transferir.jsp");
+				request.setAttribute("msg", "Você não tem dinheiro na conta!!");
+				redirecionar.forward(request, response);
+				return;
 			}
 
 			request.setAttribute("cliente", daoCliente.mostrarCliente(cliente, cliente.getCpf()));
