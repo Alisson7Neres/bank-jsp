@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 
 public class SingleConnection {
 	
+	// Criando conexão com banco de dados
 	private static String bancoUrl = "jdbc:postgresql://localhost:5432/bank?autoReconnect=true";
 	private static String user = "postgres";
 	private static String password = "admin";

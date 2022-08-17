@@ -44,6 +44,7 @@ public class BankServletEsqueciMe extends HttpServlet {
 		Bank bank = new Bank();
 		DAOBank daoBank = new DAOBank();
 		
+		// Pegando os parametros da tela de cadastro
 		String cpf = request.getParameter("cpf");
 		String rg = request.getParameter("rg");
 		String email = request.getParameter("email");
@@ -51,6 +52,7 @@ public class BankServletEsqueciMe extends HttpServlet {
 		
 		request.getSession().setAttribute("senha", cliente.getSenha());
 		
+		// Setando os parametros nos atributos
 		cliente.setCpf(cpf);
 		cliente.setRg(rg);
 		cliente.setEmail(email);

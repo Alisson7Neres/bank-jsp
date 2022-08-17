@@ -11,6 +11,7 @@ import com.bank.model.Cliente;
 
 public class DAOBank {
 
+	// Pegando conexão
 	private Connection connection = null;
 
 	public DAOBank() {
@@ -20,13 +21,16 @@ public class DAOBank {
 	public Bank gravarConta(Bank bank, Cliente cliente) {
 
 		try {
-			String sql = "insert into bank (id_bank, agencia, numeroconta, saldo, tipo) values (?, ? ,? , ? , ?);";
+			String sql = "insert into bank (id_bank, agencia, numeroconta, saldo, tipo) values (?,?,?,?,?);";
 			PreparedStatement statement = connection.prepareStatement(sql);
 
+			// Pegando cpf do cliente e setando no bank_id.
 			String bank_id = bank.getId_bank();
 			bank_id = cliente.getCpf();
+			
 			statement.setString(1, bank_id);
 			statement.setInt(2, bank.getAgencia());
+			// Verifica se o número da conta existe ou não.
 			if (bank.getNumeroConta() <= 0) {
 				long gerarConta = bank.Random();
 				bank.setNumeroConta(gerarConta);
@@ -35,14 +39,18 @@ public class DAOBank {
 			statement.setDouble(4, bank.getSaldo());
 			statement.setString(5, bank.getTipo());
 
+			// Executa e grava no banco de dados.
 			statement.execute();
 			connection.commit();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		// Ao finalizar o cadastro, irá retornar os dados.
 		return this.mostrarBank(bank, cliente);
 	}
 	
+	// Nesse método irá realizar o depósito da conta de destino.
 	public Bank TransferenciaDestino(Bank bank, Cliente cliente) {
 
 		try {
@@ -54,15 +62,17 @@ public class DAOBank {
 			statement.setDouble(1, bank.getSaldo());
 			statement.setLong(2, bank.getNumeroConta());
 			
-
+			// Executa e grava no banco de dados.
 			statement.execute();
 			connection.commit();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		// Ao finalizar, irá retornar os dados.
 		return this.mostrarBank(bank, cliente);
 	}
 	
+	// Esse método irá fazer o desconto do saldon referente ao valor da transferência.
 	public Bank TransferenciaTitular(Bank bank, Cliente cliente) {
 
 		try {
@@ -74,11 +84,14 @@ public class DAOBank {
 			statement.setDouble(1, bank.getSaldo());
 			statement.setLong(2, bank.getNumeroConta());
 
+			// Executa e grava no banco de dados.
 			statement.execute();
 			connection.commit();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		// Ao finalizar, irá retornar os dados.
 		return this.mostrarBank(bank, cliente);
 	}
 
@@ -86,7 +99,7 @@ public class DAOBank {
 
 		try {
 
-			String sql = "select DISTINCT *from cliente  inner join bank on id_bank = ? where cpf = ?;";
+			String sql = "select DISTINCT * from cliente  inner join bank on id_bank = ? where cpf = ?;";
 			
 			PreparedStatement statement = connection.prepareStatement(sql);
 			

@@ -14,6 +14,7 @@
 	<ul>
 		<li><a href="/bank/index.jsp">Início</a></li>
 		<li><a href="cadastrar.jsp">Cadastrar</a></li>
+		<li><a href="conta.jsp">Conta</a></li>
 		<li><a href="mailto:alisson.neres@hotmail.com">Contato</a></li>
 		<li><a href="https://github.com/Alisson7Neres/bank-jsp"
 			target="blank">About</a></li>
@@ -21,6 +22,9 @@
 
 	<form action="<%=request.getContextPath()%>/BankServletCadastro"
 		method="get">
+		<label
+			style="color: green; font-size: larger; position: absolute; text-align: center; width: 100%;"><c:out
+				value="${ msgExito }"></c:out></label>
 		<div>
 			<div>
 				<label>Nome</label> <input id="nome" name="nome"

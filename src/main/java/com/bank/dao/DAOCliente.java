@@ -13,15 +13,17 @@ import com.bank.model.Cliente;
 
 public class DAOCliente {
 
+	// Abrindo conexão
 	private Connection connection = null;
 
 	public DAOCliente() {
 		connection = SingleConnection.getConnection();
 	}
 
+	// Método que vai fazer a validação, se existe cpf: vai realizar o cadastro, se não, não realizar cadastro.
 	public boolean existe(String cpf) throws SQLException {
 
-		String sql = "select count(1) > 0 as existe from cliente where upper(cpf) =upper('" + cpf + "') ;";
+		String sql = "select count(1) > 0 as existe from cliente where upper(cpf) = upper('" + cpf + "') ;";
 
 		PreparedStatement statement = connection.prepareStatement(sql);
 		ResultSet set = statement.executeQuery();
@@ -71,11 +73,11 @@ public class DAOCliente {
 		statement.setString(11, cliente.getLocalidade());
 		statement.setString(12, cliente.getUf());
 
+		// Executa e grava no banco de dados.
 		statement.execute();
 		connection.commit();
-		/*
-		 * Bank bank = new Bank(); daoBank.gravarConta(bank, cliente);
-		 */
+		
+		// Ao finalizar o cadastro, irá retornar os dados.
 		return this.mostrarCliente(cliente, cliente.getCpf());
 
 	}
@@ -89,6 +91,7 @@ public class DAOCliente {
 					+ cpf + "')";
 			PreparedStatement statement = connection.prepareStatement(sql);
 
+			// Nesses if's, eu faço a seguinte condição: Se o atributo estiver nulo, irá pegar no banco de dados e setar novamente.
 			statement.setString(1, cliente.getEmail());
 			if (cliente.getEmail() == null) {
 				cliente.setEmail(cliente.getEmail());
@@ -126,12 +129,15 @@ public class DAOCliente {
 				cliente.setUf(cliente.getUf());
 			}
 
+			// Executa e grava no banco de dados.
 			statement.execute();
 			connection.commit();
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		// Ao finalizar o cadastro, irá retornar os dados.
 		return this.mostrarCliente(cliente, cliente.getCpf());
 	}
 
@@ -159,35 +165,6 @@ public class DAOCliente {
 
 		}
 
-		statement.execute();
-		return cliente;
-	}
-
-	public Cliente mostrarCliente2(Cliente cliente) throws SQLException {
-
-		String sql = "select * from cliente where cpf = cpf";
-
-		String cpf = cliente.getCpf();
-
-		PreparedStatement statement = connection.prepareStatement(sql);
-		ResultSet result = statement.executeQuery();
-
-		if (result.next()) {
-
-			cliente.setCpf(cliente.getCpf());
-			cliente.setRg(result.getString("rg"));
-			cliente.setNome(result.getString("nome"));
-			cliente.setEmail(result.getString("email"));
-			cliente.setTelefone(result.getString("telefone"));
-			cliente.setSenha(result.getString("senha"));
-			cliente.setCep(result.getString("cep"));
-			cliente.setLogradouro(result.getString("logradouro"));
-			cliente.setComplemento(result.getString("complemento"));
-			cliente.setBairro(result.getString("bairro"));
-			cliente.setLocalidade(result.getString("localidade"));
-			cliente.setUf(result.getString("uf"));
-
-		}
 		statement.execute();
 		return cliente;
 	}
@@ -242,6 +219,7 @@ public class DAOCliente {
 			statement.setString(4, email);
 			statement.execute();
 
+			// Grava a atualização no banco de dados
 			connection.commit();
 
 		} catch (SQLException e) {

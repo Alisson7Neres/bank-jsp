@@ -34,6 +34,7 @@ public class BankServletCadastroAtualizar extends HttpServlet {
 		
 		request.getSession().setAttribute("cpf", clienteCadastro.getCpf());
 		
+		// Pegando os parametros da tela de cadastro
 		String nome = request.getParameter("nome");
 		String cpf = request.getParameter("cpf");
 		String rg = request.getParameter("rg");
@@ -48,6 +49,7 @@ public class BankServletCadastroAtualizar extends HttpServlet {
 		String localidade = request.getParameter("localidade");
 		String uf = request.getParameter("uf");
 		
+		// Setando os parametros nos atributos
 		clienteCadastro.setNome(nome);
 		clienteCadastro.setCpf(cpf);
 		clienteCadastro.setRg(rg);

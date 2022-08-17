@@ -35,6 +35,7 @@ public class BankServletCadastro extends HttpServlet {
 			try {
 
 				daoCliente.mostrarCliente(clienteCadastro, clienteCadastro.getCpf());
+				request.getSession().setAttribute("msgExito", "Cadastro realizado com sucesso!");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -92,6 +93,7 @@ public class BankServletCadastro extends HttpServlet {
 			} else {
 				request.setAttribute("clienteCadastro", daoCliente.gravarCliente(clienteCadastro));
 				request.setAttribute("bank", daoBank.gravarConta(bank, clienteCadastro));
+				request.getSession().setAttribute("msgExito", "Cadastro realizado com sucesso!");
 				request.getRequestDispatcher("cadastrado.jsp").forward(request, response);
 			}
 		} catch (SQLException e) {
