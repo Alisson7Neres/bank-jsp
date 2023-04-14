@@ -58,7 +58,7 @@
 			</div>
 		</form>
 
-		<form action="<%=request.getContextPath()%>/BankServletTransferir"
+		<form action="<%=request.getContextPath()%>/transferir"
 			method="get" id="formMostrar">
 			<div>
 				<label>Destino: </label>

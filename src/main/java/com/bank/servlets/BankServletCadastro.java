@@ -19,7 +19,7 @@ import jakarta.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class BankServlet
  */
-@WebServlet("/BankServletCadastro")
+@WebServlet("/cadastro")
 public class BankServletCadastro extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

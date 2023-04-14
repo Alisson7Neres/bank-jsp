@@ -17,7 +17,7 @@
 			target="blank">About</a></li>
 	</ul>
 
-	<form action="<%=request.getContextPath()%>/BankServletEsqueciMe"
+	<form action="<%=request.getContextPath()%>/esquecir-me"
 		method="POST">
 		<div>
 			<label>CPF</label> <input id="cpf" name="cpf" type="text" required>

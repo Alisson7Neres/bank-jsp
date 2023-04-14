@@ -18,7 +18,7 @@ import jakarta.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class BankServletLogin
  */
-@WebServlet("/BankServletLogin")
+@WebServlet("/login")
 public class BankServletLogin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

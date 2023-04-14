@@ -17,7 +17,7 @@ import jakarta.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class BankServletEsqueciMe
  */
-@WebServlet("/BankServletEsqueciMe")
+@WebServlet("/esquecir-me")
 public class BankServletEsqueciMe extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

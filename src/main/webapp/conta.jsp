@@ -40,7 +40,7 @@
 			</div>
 		</form>
 
-		<form action="<%=request.getContextPath()%>/BankServletTransferir"
+		<form action="<%=request.getContextPath()%>/transferir"
 			method="get">
 			<div>
 				<label>Cliente: </label>

@@ -20,7 +20,7 @@
 			target="blank">About</a></li>
 	</ul>
 
-	<form action="<%=request.getContextPath()%>/BankServletCadastro"
+	<form action="<%=request.getContextPath()%>/cadastro"
 		method="get">
 		<label
 			style="color: green; font-size: larger; position: absolute; text-align: center; width: 100%;"><c:out

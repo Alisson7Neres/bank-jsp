@@ -20,7 +20,7 @@
 			target="blank">About</a></li>
 	</ul>
 
-	<form action="<%=request.getContextPath()%>/BankServletLogin"
+	<form action="<%=request.getContextPath()%>/login"
 		method="POST">
 		<input type="hidden" value="<%=request.getParameter("url")%>"
 			name="url">

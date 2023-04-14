@@ -29,7 +29,7 @@
 	<br>
 	<br>
 
-	<form action="<%=request.getContextPath()%>/BankServletTransferir"
+	<form action="<%=request.getContextPath()%>/transferir"
 		method="POST">
 		<div>
 		<label style="color: red"><c:out value="${ msg }"></c:out></label>

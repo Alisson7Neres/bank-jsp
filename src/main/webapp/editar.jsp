@@ -22,7 +22,7 @@
 
 
 	<form
-		action="<%=request.getContextPath()%>/BankServletCadastroAtualizar"
+		action="<%=request.getContextPath()%>/atualizar"
 		method="post">
 		<div>
 			<label>Nome</label> <input id="nome" name="nome"
