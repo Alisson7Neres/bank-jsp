@@ -5,8 +5,10 @@ import java.sql.SQLException;
 
 import com.bank.dao.DAOBank;
 import com.bank.dao.DAOCliente;
+import com.bank.dao.DAOEndereco;
 import com.bank.model.Bank;
 import com.bank.model.Cliente;
+import com.bank.model.Endereco;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -47,8 +49,11 @@ public class BankServletCadastro extends HttpServlet {
 			throws ServletException, IOException {
 
 		Cliente clienteCadastro = new Cliente();
+		Endereco enderecoCadastro = new Endereco();
 		Bank bank = new Bank();
+		
 		DAOBank daoBank = new DAOBank();
+		DAOEndereco daoEndereco = new DAOEndereco();
 		
 		// Pegando os parametros da tela de cadastro
 		String nome = request.getParameter("nome");
@@ -75,12 +80,12 @@ public class BankServletCadastro extends HttpServlet {
 		clienteCadastro.setTelefone(telefone);
 		clienteCadastro.setSenha(senha);
 
-		clienteCadastro.setCep(cep);
-		clienteCadastro.setLogradouro(logradouro);
-		clienteCadastro.setComplemento(complemento);
-		clienteCadastro.setBairro(bairro);
-		clienteCadastro.setLocalidade(localidade);
-		clienteCadastro.setUf(uf);
+		enderecoCadastro.setCep(cep);
+		enderecoCadastro.setLogradouro(logradouro);
+		enderecoCadastro.setComplemento(complemento);
+		enderecoCadastro.setBairro(bairro);
+		enderecoCadastro.setLocalidade(localidade);
+		enderecoCadastro.setUf(uf);
 		
 		bank.setTipo(tipo);
 		request.getSession().setAttribute("tipo", bank.getTipo());
@@ -93,6 +98,7 @@ public class BankServletCadastro extends HttpServlet {
 			} else {
 				request.setAttribute("clienteCadastro", daoCliente.gravarCliente(clienteCadastro));
 				request.setAttribute("bank", daoBank.gravarConta(bank, clienteCadastro));
+				request.setAttribute("enderecoCadastro", daoEndereco.gravarEndereco(enderecoCadastro, clienteCadastro));
 				request.getSession().setAttribute("msgExito", "Cadastro realizado com sucesso!");
 				request.getRequestDispatcher("cadastrado.jsp").forward(request, response);
 			}

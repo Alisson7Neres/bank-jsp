@@ -32,6 +32,20 @@ create table bank (
    
 );
 
-alter table bank alter column ID_bank type varchar;
+create table endereco (
+    id_endereco serial primary key not null,
+    cep VARCHAR(50) not null,
+    logradouro VARCHAR(100) not null,
+    complemento VARCHAR(100),
+    bairro VARCHAR(100) not null,
+	localidade VARCHAR(100) not null,
+	uf VARCHAR(5) not null
+   
+);
 
+alter table bank alter column ID_bank type varchar;
 alter table bank add FOREIGN KEY (ID_bank) references cliente (cpf);
+
+alter table endereco alter column id_endereco type varchar;
+alter table endereco add FOREIGN KEY (id_endereco) references cliente (cpf);
+

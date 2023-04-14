@@ -57,7 +57,7 @@ public class DAOCliente {
 
 	public Cliente gravarCliente(Cliente cliente) throws SQLException {
 
-		String sql = "insert into cliente(cpf, rg, nome, email, telefone, senha, cep, logradouro, complemento, bairro, localidade, uf) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		String sql = "insert into cliente(cpf, rg, nome, email, telefone, senha) values (?, ?, ?, ?, ?, ?)";
 		PreparedStatement statement = connection.prepareStatement(sql);
 
 		statement.setString(1, cliente.getCpf());
@@ -66,12 +66,6 @@ public class DAOCliente {
 		statement.setString(4, cliente.getEmail());
 		statement.setString(5, cliente.getTelefone());
 		statement.setString(6, cliente.getSenha());
-		statement.setString(7, cliente.getCep());
-		statement.setString(8, cliente.getLogradouro());
-		statement.setString(9, cliente.getComplemento());
-		statement.setString(10, cliente.getBairro());
-		statement.setString(11, cliente.getLocalidade());
-		statement.setString(12, cliente.getUf());
 
 		// Executa e grava no banco de dados.
 		statement.execute();
@@ -86,8 +80,8 @@ public class DAOCliente {
 
 		try {
 
-			String sql = "update cliente email set email = ?, telefone = ?, senha = ?, "
-					+ "cep = ?, logradouro = ?, complemento = ?, bairro = ?, localidade = ?, uf = ? where cpf = ('"
+			String sql = "update cliente email set email = ?, telefone = ?, senha = ? "
+					+ "where cpf = ('"
 					+ cpf + "')";
 			PreparedStatement statement = connection.prepareStatement(sql);
 
@@ -104,30 +98,7 @@ public class DAOCliente {
 			if (cliente.getSenha() == null) {
 				cliente.setSenha(cliente.getSenha());
 			}
-			statement.setString(4, cliente.getCep());
-			if (cliente.getCep() == null) {
-				cliente.setCep(cliente.getCep());
-			}
-			statement.setString(5, cliente.getLogradouro());
-			if (cliente.getLogradouro() == null) {
-				cliente.setLogradouro(cliente.getLogradouro());
-			}
-			statement.setString(6, cliente.getComplemento());
-			if (cliente.getComplemento() == null) {
-				cliente.setComplemento(cliente.getComplemento());
-			}
-			statement.setString(7, cliente.getBairro());
-			if (cliente.getBairro() == null) {
-				cliente.setBairro(cliente.getBairro());
-			}
-			statement.setString(8, cliente.getLocalidade());
-			if (cliente.getLocalidade() == null) {
-				cliente.setLocalidade(cliente.getLocalidade());
-			}
-			statement.setString(9, cliente.getUf());
-			if (cliente.getUf() == null) {
-				cliente.setUf(cliente.getUf());
-			}
+			
 
 			// Executa e grava no banco de dados.
 			statement.execute();
@@ -156,12 +127,6 @@ public class DAOCliente {
 			cliente.setEmail(result.getString("email"));
 			cliente.setTelefone(result.getString("telefone"));
 			cliente.setSenha(result.getString("senha"));
-			cliente.setCep(result.getString("cep"));
-			cliente.setLogradouro(result.getString("logradouro"));
-			cliente.setComplemento(result.getString("complemento"));
-			cliente.setBairro(result.getString("bairro"));
-			cliente.setLocalidade(result.getString("localidade"));
-			cliente.setUf(result.getString("uf"));
 
 		}
 

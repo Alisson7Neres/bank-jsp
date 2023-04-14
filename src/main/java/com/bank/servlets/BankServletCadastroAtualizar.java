@@ -5,8 +5,10 @@ import java.sql.SQLException;
 
 import com.bank.dao.DAOBank;
 import com.bank.dao.DAOCliente;
+import com.bank.dao.DAOEndereco;
 import com.bank.model.Bank;
 import com.bank.model.Cliente;
+import com.bank.model.Endereco;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -27,12 +29,15 @@ public class BankServletCadastroAtualizar extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		Cliente clienteCadastro = new Cliente();
-		DAOCliente daoCliente = new DAOCliente();
-		
+		Endereco enderecoCadastro = new Endereco();
 		Bank bank = new Bank();
+		
+		DAOCliente daoCliente = new DAOCliente();
+		DAOEndereco daoEndereco = new DAOEndereco();
 		DAOBank daoBank = new DAOBank();
 		
 		request.getSession().setAttribute("cpf", clienteCadastro.getCpf());
+		request.getSession().setAttribute("id_endereco", enderecoCadastro.getId_endereco());
 		
 		// Pegando os parametros da tela de cadastro
 		String nome = request.getParameter("nome");
@@ -57,12 +62,14 @@ public class BankServletCadastroAtualizar extends HttpServlet {
 		clienteCadastro.setTelefone(telefone);
 		clienteCadastro.setSenha(senha);
 		
-		clienteCadastro.setCep(cep);
-		clienteCadastro.setLogradouro(logradouro);
-		clienteCadastro.setComplemento(complemento);
-		clienteCadastro.setBairro(bairro);
-		clienteCadastro.setLocalidade(localidade);
-		clienteCadastro.setUf(uf);
+		enderecoCadastro.setCep(cep);
+		enderecoCadastro.setLogradouro(logradouro);
+		enderecoCadastro.setComplemento(complemento);
+		enderecoCadastro.setBairro(bairro);
+		enderecoCadastro.setLocalidade(localidade);
+		enderecoCadastro.setUf(uf);
+		
+		String id_endereco = clienteCadastro.getCpf();
 		
 		String tipo = request.getParameter("tipo");
 		
@@ -72,6 +79,7 @@ public class BankServletCadastroAtualizar extends HttpServlet {
 		try {
 			request.setAttribute("clienteCadastro", daoCliente.atualizarCliente(clienteCadastro, clienteCadastro.getCpf()));
 			request.setAttribute("bank", daoBank.mostrarBank(bank, clienteCadastro));
+			request.setAttribute("enderecoCadastro", daoEndereco.atualizarEndereco(enderecoCadastro, id_endereco));
 			request.getRequestDispatcher("cadastrado.jsp").forward(request, response);
 		} catch (SQLException e) {
 			e.printStackTrace();

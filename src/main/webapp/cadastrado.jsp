@@ -57,27 +57,27 @@
 		<br />
 		<div>
 			<label>CEP</label> <input onblur="viaCep()" id="cep" name="cep"
-				value="${ clienteCadastro.cep }" disabled="disabled">
+				value="${ enderecoCadastro.cep }" disabled="disabled">
 		</div>
 		<div>
 			<label>Logradouro</label> <input id="logradouro" name="logradouro"
-				value="${ clienteCadastro.logradouro }" disabled="disabled">
+				value="${ enderecoCadastro.logradouro }" disabled="disabled">
 		</div>
 		<div>
 			<label>Complemento</label> <input id="complemento" name="complemento"
-				value="${ clienteCadastro.complemento }" disabled="disabled">
+				value="${ enderecoCadastro.complemento }" disabled="disabled">
 		</div>
 		<div>
 			<label>Bairro</label> <input id="bairro" name="bairro"
-				value="${ clienteCadastro.bairro }" disabled="disabled">
+				value="${ enderecoCadastro.bairro }" disabled="disabled">
 		</div>
 		<div>
 			<label>Localidade</label> <input id="localidade" name="localidade"
-				value="${ clienteCadastro.localidade }" disabled="disabled">
+				value="${ enderecoCadastro.localidade }" disabled="disabled">
 		</div>
 		<div>
 			<label>UF</label> <input id="uf" name="uf"
-				value="${ clienteCadastro.uf }" disabled="disabled">
+				value="${ enderecoCadastro.uf }" disabled="disabled">
 		</div>
 		<br>
 		<div>
