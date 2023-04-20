@@ -40,15 +40,15 @@
 		<div>
 			<div>
 				<label>Email</label> <input id="email" name="email"
-					value="${ cliente.email }">
+					value="${ cliente.email }" required>
 			</div>
 			<div>
 				<label>Telefone</label> <input id="telefone" name="telefone"
-					value="${ cliente.telefone }">
+					value="${ cliente.telefone }" required>
 			</div>
 			<div>
 				<label>Senha</label> <input id="senha" name="senha" type="password"
-					value="${ cliente.senha }">
+					value="${ cliente.senha }" required>
 			</div>
 		</div>
 		<br /> <br />
@@ -57,31 +57,27 @@
 		</div>
 		<br />
 		<div>
-			<label>ID</label> <input  id="id_endereco" name="id_endereco"
-				value="${ enderecoCadastro.id_endereco }" readonly="readonly">
-		</div>
-		<div>
 			<label>CEP</label> <input onblur="viaCep()" id="cep" name="cep"
-				value="${ enderecoCadastro.cep }">
+				value="${ endereco.cep }" required>
 		</div>
 		<div>
 			<label>Logradouro</label> <input id="logradouro" name="logradouro"
-				value="${ enderecoCadastro.logradouro }">
+				value="${ endereco.logradouro }" required>
 		</div>
 		<div>
 			<label>Complemento</label> <input id="complemento" name="complemento"
-				value="${ enderecoCadastro.complemento }">
+				value="${ endereco.complemento }" required>
 		</div>
 		<div>
 			<label>Bairro</label> <input id="bairro" name="bairro"
-				value="${ enderecoCadastro.bairro }">
+				value="${ endereco.bairro }" required>
 		</div>
 		<div>
 			<label>Localidade</label> <input id="localidade" name="localidade"
-				value="${ enderecoCadastro.localidade }">
+				value="${ endereco.localidade }" required>
 		</div>
 		<div>
-			<label>UF</label> <input id="uf" name="uf" value="${ enderecoCadastro.uf }">
+			<label>UF</label> <input id="uf" name="uf" value="${ endereco.uf }" required>
 		</div>
 		<br>
 		<div>

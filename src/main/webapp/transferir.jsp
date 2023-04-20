@@ -30,7 +30,7 @@
 	<br>
 
 	<form action="<%=request.getContextPath()%>/transferir"
-		method="POST">
+		method="POST" class="form">
 		<div>
 		<label style="color: red"><c:out value="${ msg }"></c:out></label>
 		<br/>

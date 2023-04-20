@@ -5,8 +5,10 @@ import java.sql.SQLException;
 
 import com.bank.dao.DAOBank;
 import com.bank.dao.DAOCliente;
+import com.bank.dao.DAOEndereco;
 import com.bank.model.Bank;
 import com.bank.model.Cliente;
+import com.bank.model.Endereco;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -44,11 +46,21 @@ public class BankServletEsqueciMe extends HttpServlet {
 		Bank bank = new Bank();
 		DAOBank daoBank = new DAOBank();
 		
+		Endereco endereco = new Endereco();
+		DAOEndereco daoEndereco = new DAOEndereco();
+		
 		// Pegando os parametros da tela de cadastro
 		String cpf = request.getParameter("cpf");
 		String rg = request.getParameter("rg");
 		String email = request.getParameter("email");
 		String tipo = request.getParameter("tipo");
+		
+		String cep = request.getParameter("cep");
+		String logradouro = request.getParameter("logradouro");
+		String complemento = request.getParameter("complemento");
+		String bairro = request.getParameter("bairro");
+		String localidade = request.getParameter("localidade");
+		String uf = request.getParameter("uf");
 		
 		request.getSession().setAttribute("senha", cliente.getSenha());
 		
@@ -66,9 +78,17 @@ public class BankServletEsqueciMe extends HttpServlet {
 		bank.setTipo(tipo);
 		request.getSession().setAttribute("tipo", bank.getTipo());
 		
+		endereco.setCep(cep);
+		endereco.setLogradouro(logradouro);
+		endereco.setComplemento(complemento);
+		endereco.setBairro(bairro);
+		endereco.setLocalidade(localidade);
+		endereco.setUf(uf);
+		
 		try {
 				request.setAttribute("cliente", daoCliente.mostrarCliente(cliente, cliente.getCpf()));
 				request.setAttribute("bank", daoBank.mostrarBank(bank, cliente));
+				request.setAttribute("endereco", daoEndereco.mostrarEndereco(endereco, cliente));
 				request.getRequestDispatcher("editar.jsp").forward(request, response);
 		} catch (SQLException e) {
 			e.getClass();

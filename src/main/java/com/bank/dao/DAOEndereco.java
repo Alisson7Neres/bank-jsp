@@ -67,11 +67,11 @@ public class DAOEndereco {
 			ResultSet set = statement.executeQuery();
 			if (set.next()) {
 				endereco.setCep(set.getString("cep"));
-				endereco.setCep(set.getString("logradouro"));
-				endereco.setCep(set.getString("complemento"));
-				endereco.setCep(set.getString("bairro"));
-				endereco.setCep(set.getString("localidade"));
-				endereco.setCep(set.getString("uf"));
+				endereco.setLogradouro(set.getString("logradouro"));
+				endereco.setComplemento(set.getString("complemento"));
+				endereco.setBairro(set.getString("bairro"));
+				endereco.setLocalidade(set.getString("localidade"));
+				endereco.setUf(set.getString("uf"));
 
 			}
 
